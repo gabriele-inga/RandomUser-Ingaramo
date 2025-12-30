@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <link rel="apple-touch-icon" href="./img/logo.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+  <link rel="stylesheet" href="./style/style.css">
+  <script defer src="./script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script defer src="background.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+
+
+  <title>RandomUser</title>
+</head>
+<body>
+  
+  <!-- logo -->
+  <div class="logo" id="logo">
+    <img src="./img/logo.png" alt="">
+  </div>
+
+  <!-- nav -->
+  <div class="navbar" id="navbar">
+    <a href="#home">RandomUser</a>
+    <a href="#statistics">Statistics</a>
+    <a href="#about">About</a>
+    <a href="https://github.com" target="_blank">GitHub</a>
+  </div>
+
+  <!-- toggler dark light -->
+  <div class="theme-toggler" id="theme-toggler">
+    <button class="theme-btn" id="theme-btn-light">
+      <svg class="icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+
+    <button class="theme-btn" id="theme-btn-dark">
+      <svg class="icon moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="user-container layout-2cols">
+
+      <!-- control panel -->
+      <div class="controls-panel">
+
+        <div class="control-group">
+          <label for="recordSlider">
+            Number of users: <span id="recordCount">10</span>
+          </label>
+          <input type="range" id="recordSlider" min="1" max="50" value="10" class="slider">
+        </div>
+
+        <div class="control-group">
+          <label>Gender:</label>
+
+          
+          <div class="gender-selector">
+            <label class="gender-option">
+              <input type="radio" name="gender" value="female">
+              <span class="gender-pill">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="10" r="6"/>
+                  <path d="M12 16v5M9 21h6"/>
+                </svg>
+                Female
+              </span>
+            </label>
+
+            <label class="gender-option">
+              <input type="radio" name="gender" value="male">
+              <span class="gender-pill">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="10" cy="14" r="6"/>
+                  <path d="M14 10l7-7M15 3h6v6"/>
+                </svg>
+                Male
+              </span>
+            </label>
+
+            <label class="gender-option">
+              <input type="radio" name="gender" value="all" checked>
+              <span class="gender-pill">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M3 12h18M12 3v18"/>
+                </svg>
+                All
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Nationality:</label>
+
+          <!-- checkbox real -->
+          <div class="nat-checkboxes">
+            <input type="checkbox" id="nat-us" name="nat" value="US" style="display:none">
+            <input type="checkbox" id="nat-fr" name="nat" value="FR" style="display:none">
+            <input type="checkbox" id="nat-de" name="nat" value="DE" style="display:none">
+            <input type="checkbox" id="nat-ch" name="nat" value="CH" style="display:none">
+            <input type="checkbox" id="nat-br" name="nat" value="BR" style="display:none">
+            <input type="checkbox" id="nat-au" name="nat" value="AU" style="display:none">
+          </div>
+
+          <!-- MAPPA -->
+          <div class="world-map-container">
+            <img src="flags/world.svg" class="world-map-bg" alt="World map">
+
+            <!-- USA -->
+            <label for="nat-us" class="flag-marker us">
+              <img src="flags/us.svg" alt="USA">
+            </label>
+
+            <!-- FRANCE -->
+            <label for="nat-fr" class="flag-marker fr">
+              <img src="flags/fr.svg" alt="France">
+            </label>
+
+            <!-- GERMANY -->
+            <label for="nat-de" class="flag-marker de">
+              <img src="flags/ge.svg" alt="Germany">
+            </label>
+
+            <!-- SWITZERLAND -->
+            <label for="nat-ch" class="flag-marker ch">
+              <img src="flags/ch.svg" alt="Switzerland">
+            </label>
+
+            <!-- BRAZIL -->
+            <label for="nat-br" class="flag-marker br">
+              <img src="flags/br.svg" alt="Brazil">
+            </label>
+
+            <!-- AUSTRALIA -->
+            <label for="nat-au" class="flag-marker au">
+              <img src="flags/au.svg" alt="Australia">
+            </label>
+          </div>
+        </div>
+
+        <div class="controls-footer">
+          <button class="load-btn" id="loadBtn">Load users</button>
+        </div>
+      </div>
+
+      <!-- risultati-->
+      <div class="results-panel">
+
+        <!-- user -->
+        <div class="user-card" id="userCard">
+          <div class="loader" id="loader">Loading...</div>
+
+          <div class="user-content" id="userContent" style="display: none;">
+            <img id="userPhoto" class="user-photo" src="" alt="User photo">
+            <h2 id="userName"></h2>
+
+            <div class="user-info">
+              <p class="info-row">
+                <svg class="info-icon" viewBox="0 0 24 24">
+                  <path d="M4 4h16v16H4z" fill="none"/>
+                  <path d="M4 6l8 6 8-6" fill="none"/>
+                  <rect x="4" y="6" width="16" height="12" rx="2"/>
+                </svg>
+                <strong>Email</strong>
+                <span id="userEmail"></span>
+              </p>
+
+              <p class="info-row">
+                <svg class="info-icon" viewBox="0 0 24 24">
+                  <path d="M22 16.9v3a2 2 0 0 1-2.18 2
+                           19.86 19.86 0 0 1-8.63-3.07
+                           19.5 19.5 0 0 1-6-6
+                           19.86 19.86 0 0 1-3.07-8.67
+                           A2 2 0 0 1 4.11 2h3
+                           a2 2 0 0 1 2 1.72
+                           12.84 12.84 0 0 0 .7 2.81
+                           2 2 0 0 1-.45 2.11L8.09 9.91
+                           a16 16 0 0 0 6 6l1.27-1.27
+                           a2 2 0 0 1 2.11-.45
+                           12.84 12.84 0 0 0 2.81.7
+                           A2 2 0 0 1 22 16.9z"
+                        fill="none"/>
+                </svg>
+                <strong>Phone</strong>
+                <span id="userPhone"></span>
+              </p>
+
+              <p class="info-row">
+                <svg class="info-icon" viewBox="0 0 24 24">
+                  <path d="M12 21s-6-5.33-6-10
+                           a6 6 0 1 1 12 0
+                           c0 4.67-6 10-6 10z"
+                        fill="none"/>
+                  <circle cx="12" cy="11" r="2"/>
+                </svg>
+                <strong>Location</strong>
+                <span id="userLocation"></span>
+              </p>
+
+              <p class="info-row">
+                <svg class="info-icon" viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="16" rx="2" fill="none"/>
+                  <path d="M16 3v4M8 3v4M3 11h18"/>
+                </svg>
+                <strong>Age</strong>
+                <span id="userAge"></span>
+              </p>
+
+              <p class="info-row">
+                <svg class="info-icon" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" fill="none"/>
+                  <path d="M2 12h20M12 2a15 15 0 0 1 0 20
+                           M12 2a15 15 0 0 0 0 20"
+                        fill="none"/>
+                </svg>
+                <strong>Nationality</strong>
+                <span id="userNat"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- nav -->
+        <div class="navigation" id="navigation" style="display: none;">
+          <button id="prevBtn" class="nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <span id="userIndex" class="user-index">1 / 10</span>
+
+          <button id="nextBtn" class="nav-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- section stats -->
+  <section id="statistics" class="statistics-section">
+    <div class="section-content">
+      <h2 class="section-title">User Statistics</h2>
+      <p class="section-subtitle">Analytics based on generated users</p>
+      
+      <div class="stats-container">
+        <!-- stats -->
+        <div class="stats-grid">
+          <div class="stats-card">
+            <div class="stats-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div class="stats-content">
+              <h3 class="stats-value" id="totalUsers">0</h3>
+              <p class="stats-label">Total Users Generated</p>
+            </div>
+          </div>
+
+          <div class="stats-card">
+            <div class="stats-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <div class="stats-content">
+              <h3 class="stats-value" id="avgAge">0</h3>
+              <p class="stats-label">Average Age</p>
+            </div>
+          </div>
+
+          <div class="stats-card">
+            <div class="stats-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20v-6M6 20v-6M18 20v-6"></path>
+                <path d="M12 14l-6-6V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4l-6 6z"></path>
+              </svg>
+            </div>
+            <div class="stats-content">
+              <h3 class="stats-value" id="topCountry">--</h3>
+              <p class="stats-label">Most Common Country</p>
+            </div>
+          </div>
+
+          <div class="stats-card">
+            <div class="stats-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+              </svg>
+            </div>
+            <div class="stats-content">
+              <h3 class="stats-value" id="genderRatio">50/50</h3>
+              <p class="stats-label">Male/Female Ratio</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- grafici -->
+        <div class="charts-container">
+          <div class="chart-card">
+            <h3 class="chart-title">Nationality Distribution</h3>
+            <div class="chart-wrapper">
+              <canvas id="nationalityChart"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3 class="chart-title">Age Distribution</h3>
+            <div class="chart-wrapper">
+              <canvas id="ageChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- stats in piu -->
+        <div class="additional-stats">
+          <div class="stats-table">
+            <h3 class="table-title">Detailed Statistics</h3>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Metric</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Youngest User</td>
+                    <td id="youngestAge">--</td>
+                  </tr>
+                  <tr>
+                    <td>Oldest User</td>
+                    <td id="oldestAge">--</td>
+                  </tr>
+                  <tr>
+                    <td>Most Common Email Domain</td>
+                    <td id="commonDomain">--</td>
+                  </tr>
+                  <tr>
+                    <td>Unique Countries</td>
+                    <td id="uniqueCountries">0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="refresh-controls">
+            <button class="refresh-btn" id="refreshStats">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 4v6h-6M1 20v-6h6"></path>
+                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+              </svg>
+              Update Statistics
+            </button>
+            <p class="refresh-note">Statistics update automatically with each user generation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="section-content">
+      <h2 class="section-title">About RandomUser</h2>
+      <p class="section-subtitle">A free, open-source API for generating random user data</p>
+      
+      <div class="about-content">
+        <div class="about-card">
+          <h3>What is RandomUser?</h3>
+          <p>RandomUser is a tool that generates random user data, perfect for prototyping, testing, and demo purposes. Their API returns realistic user profiles including names, emails, photos, locations, and more.</p>
+        </div>
+        
+        <div class="about-card">
+          <h3>Features</h3>
+          <ul>
+            <li>Generate random user profiles with realistic data</li>
+            <li>Filter by gender, nationality, and count</li>
+            <li>High-quality profile photos</li>
+            <li>Multiple data formats (JSON)</li>
+            <li>Free and open-source</li>
+          </ul>
+        </div>
+        
+        <div class="about-card">
+          <h3>How to Use</h3>
+          <p>Simply adjust the filters on the left and click "Load users" to generate random profiles. Use the navigation buttons to browse through generated users.</p>
+          <p>For developers: The API endpoint is available at <code>https://randomuser.me/api/</code></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Ingaramo Gabriele © 2025 RandomUser Generator. All data is randomly generated and not real.</p>
+      <p>Powered by <a href="https://randomuser.me" target="_blank">RandomUser API</a></p>
+    </div>
+  </footer>
+
+  <!-- scroll fluido -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if(targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if(targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
