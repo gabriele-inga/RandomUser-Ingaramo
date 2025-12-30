@@ -9,7 +9,7 @@ RandomUser Generator è un'applicazione web moderna che consente di generare pro
 - **Creato da**: Progettato personalmente su Canva
 - **Stile**: Design minimalista e moderno che riflette la natura del progetto
   
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![alt text](https://github.com/gabriele-inga/RandomUser-Ingaramo/blob/main/Progetto%20Randomuser/img/logo.png?raw=true)
 
 
 
