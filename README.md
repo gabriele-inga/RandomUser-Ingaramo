@@ -205,9 +205,6 @@ Parameters:
 - Viola scuro: `#4A0E4A`
 - Blu notte: `#1A264D`
 
-### Schemi 3-5
-- Combinazioni di arancione, blu navy, turchese e teal
-
 ## 📝 Note di Sviluppo
 
 ### Best Practices Implementate
@@ -217,12 +214,6 @@ Parameters:
 4. **Loading States**: Indicatori di caricamento per UX migliorata
 5. **Local Storage**: Potenziale per salvare preferenze
 
-### Future Implementazioni
-- Esportazione dati in CSV/JSON
-- Più filtri avanzati
-- Temi personalizzabili dall'utente
-- Supporto per più lingue
-- Modalità offline con service workers
 
 ## 👥 Crediti
 
